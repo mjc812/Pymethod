@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 from io import BytesIO
 
 from flask_cors import cross_origin
@@ -6,22 +7,23 @@ from backend.parser import ast_parser
 from backend.systrace import trace_call
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/graph', methods=['POST'])
 @cross_origin()
 def respond():
+    response = {}
     try:
         file = request.files['file']
         file_bytes = file.read()
         defs = ast_parser(file_bytes)
-        trace_call(file_bytes, defs)
-        print(defs)
+        edges = trace_call(file_bytes, defs)
+        response["defs"] = defs
+        response["fromToEdges"] = edges
 
     except Exception as e:
-        print(f"Error found: {e}")
+        response['error'] = str(e)
 
-    response = {}
-    response["defs"] = defs
     response = jsonify(response)
     return response
 
@@ -48,8 +50,3 @@ def index():
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
     app.run(threaded=True, port=8888)
-
-
-
-# Add headers
-    # response.headers.add('Access-Control-Allow-Origin', '*')

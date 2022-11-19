@@ -21,12 +21,6 @@ def e():
 def f():
     i = 0
 
-def d():
-    randomclass.foo()
-
-def c():
-    d()
-
 def b():
     i = 1
     while (i != 0) :

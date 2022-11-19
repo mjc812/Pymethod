@@ -6,7 +6,6 @@ function App() {
       const file = e.target.files[0];
       const data = new FormData();
       data.append('file', file);
-      data.append('filename', "test");
       
       fetch("http://127.0.0.1:8888/graph", {
         method: 'POST',

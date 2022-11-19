@@ -29,13 +29,11 @@ def trace_callback(frame, event, arg):
         if (coName in edges[callerName]) :
             edges[callerName][coName] = edges[callerName][coName] + 1
         else :
-            print("here")    
             edges[callerName][coName] = 1
     else :
         toNode = {}
         toNode[coName] = 1
         edges[callerName] = toNode
-
     return
 
 def trace_call(file_bytes, defs):
@@ -46,5 +44,5 @@ def trace_call(file_bytes, defs):
     allDefs.extend(defs['allDefs'])
     sys.settrace(trace_callback)
     exec(file_bytes, locals(), locals()) # globals(), globals()
-    defs['fromToEdges'] = edges
-    # sys.settrace(None)
+    sys.settrace(None)
+    return edges
