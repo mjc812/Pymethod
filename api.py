@@ -14,7 +14,7 @@ def respond():
         file = request.files['file']
         file_bytes = file.read()
         defs = ast_parser(file_bytes)
-        trace_call(file_bytes)
+        trace_call(file_bytes, defs)
 
     except Exception as e:
         print(f"Error found: {e}")

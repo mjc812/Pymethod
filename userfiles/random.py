@@ -1,8 +1,22 @@
+class randomclass:
+    def foo() :
+        morerandomclass.bar()
+
+class morerandomclass:
+    def bar() :
+        e()
+
+def e():
+    i = 0
+
+def d():
+    randomclass.foo()
+
 def c():
-    i = 3
+    d()
 
 def b():
-    i = 3
+    i = 4
     while (i != 0) :
         i -= 1
         c()
@@ -13,4 +27,4 @@ def a():
     else :
         b()
 
-a()
+a() 
