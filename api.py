@@ -12,14 +12,14 @@ def respond():
     try:
         file = request.files['file']
         file_bytes = file.read()
-        ast_parser(file_bytes)
+        defs = ast_parser(file_bytes)
 
     except Exception as e:
         print(f"Couldn't upload file {e}")
 
     response = {}
     
-    response["response"] = "You have succeeded. Go on."
+    response["defs"] = defs
     # Return the response in json format
     response = jsonify(response)
     
