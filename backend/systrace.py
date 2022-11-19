@@ -4,6 +4,7 @@
 import sys
 
 allDefs = []
+edges = {}
 
 def trace_callback(frame, event, arg):
     if event != 'call':
@@ -21,10 +22,29 @@ def trace_callback(frame, event, arg):
     if (callerName not in allDefs) :
         return
 
-    print('Call to %s from %s' % (coName, callerName))
+    #print(co)
+    #print(caller)
+
+    if (callerName in edges) :
+        if (coName in edges[callerName]) :
+            edges[callerName][coName] = edges[callerName][coName] + 1
+        else :
+            print("here")    
+            edges[callerName][coName] = 1
+    else :
+        toNode = {}
+        toNode[coName] = 1
+        edges[callerName] = toNode
+
     return
 
 def trace_call(file_bytes, defs):
+    global allDefs
+    global edges
+    allDefs = []
+    edges = {}
     allDefs.extend(defs['allDefs'])
     sys.settrace(trace_callback)
     exec(file_bytes, locals(), locals()) # globals(), globals()
+    defs['fromToEdges'] = edges
+    # sys.settrace(None)

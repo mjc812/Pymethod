@@ -1,12 +1,24 @@
+import random
+
 class randomclass:
     def foo() :
+        morerandomclass.bar()
+        morerandomclass.bar()
+        morerandomclass.bar()
+        morerandomclass.bar()
         morerandomclass.bar()
 
 class morerandomclass:
     def bar() :
-        e()
+        if (random.randint(0,1) == 0) :
+            e()
+        else :
+            f()
 
 def e():
+    i = 0
+
+def f():
     i = 0
 
 def d():
@@ -16,7 +28,7 @@ def c():
     d()
 
 def b():
-    i = 4
+    i = 1
     while (i != 0) :
         i -= 1
         c()
@@ -28,3 +40,4 @@ def a():
         b()
 
 a() 
+d()
