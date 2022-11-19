@@ -1,22 +1,16 @@
-def a():
-    b()
-
-class A:
-    def foo():
-        x = 1
-    def bar():
-        y = 2
+def c():
+    i = 3
 
 def b():
-    z = 1
+    i = 3
+    while (i != 0) :
+        i -= 1
+        c()
 
-class B:
-    def baz():
-        x = 1
-    def qux():
-        y = 2
+def a():
+    if (0) :
+        b()
+    else :
+        b()
 
 a()
-
-def c():
-    z = 1
