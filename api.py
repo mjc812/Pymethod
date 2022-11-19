@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 from io import BytesIO
+from backend.parser import trace_calls
+
 app = Flask(__name__)
 
 
@@ -8,8 +10,7 @@ def respond():
     try:
         file = request.files['file']
         file_bytes = file.read()
-        file_content = BytesIO(file_bytes).readlines()
-        print(file_content)
+        trace_calls(file_bytes)
 
     except Exception as e:
         print(f"Couldn't upload file {e}")
