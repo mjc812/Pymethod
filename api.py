@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 
-@app.route('/getmsg/', methods=['GET'])
+@app.route('/getmsg/', methods=['POST'])
 def respond():
     # Retrieve the name from the url parameter /getmsg/?name=
     name = request.args.get("name", None)
@@ -22,24 +22,12 @@ def respond():
         response["MESSAGE"] = f"Welcome {name} to our awesome API!"
 
     # Return the response in json format
-    return jsonify(response)
+    response = jsonify(response)
+    
+    # Add headers
+    response.headers.add('Access-Control-Allow-Origin', '*')
 
-
-@app.route('/post/', methods=['POST'])
-def post_something():
-    param = request.form.get('name')
-    print(param)
-    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
-    if param:
-        return jsonify({
-            "Message": f"Welcome {name} to our awesome API!",
-            # Add this option to distinct the POST request
-            "METHOD": "POST"
-        })
-    else:
-        return jsonify({
-            "ERROR": "No name found. Please send a name."
-        })
+    return response
 
 
 @app.route('/')
