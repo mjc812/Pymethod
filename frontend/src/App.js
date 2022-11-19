@@ -7,10 +7,8 @@ function App() {
       const file = e.target.files[0];
       const data = new FormData();
       data.append('file', file);
-        
-      console.log(data.get('file'))
-
-      fetch("http://127.0.0.1:5000/getmsg/?name=debbie", {
+      
+      fetch("http://127.0.0.1:5000/graph", {
         method: 'POST',
         body: data
       })
